@@ -25,26 +25,27 @@ public class MybatisDataSourceConfig {
 
 	@Bean
 	public DataSource createDataSource() throws SQLException {
+		logger.info("userName=" + jdbcConfig.getUserName() + "; driverClass=" + jdbcConfig.getDriverClass() + ";url="
+				+ jdbcConfig.getUrl() + ";password=" + jdbcConfig.getPassword());
 		return DataSourceBuilder.create(Thread.currentThread().getContextClassLoader())
-				.driverClassName(jdbcConfig.getDriverClass()).url(jdbcConfig.getUrl()).username(jdbcConfig.getUserName())
-				.password(jdbcConfig.getPassword()).build();
+				.driverClassName(jdbcConfig.getDriverClass()).url(jdbcConfig.getUrl())
+				.username(jdbcConfig.getUserName()).password(jdbcConfig.getPassword()).build();
 	}
 
-	@PropertySource(value = "application.properties")
 	@Component
 	static class JdbcConfig {
 		/** * 数据库用户名 */
-		//@Value("${spring.datasource.username}")
-		private String userName = "root";
+		@Value("${spring.datasource.username}")
+		private String userName;
 		/** * 驱动名称 */
-		//@Value("${spring.datasource.driver-class-name}")
-		private String driverClass = "com.mysql.jdbc.Driver";
+		@Value("${spring.datasource.driverClassName}")
+		private String driverClass;
 		/** * 数据库连接url */
-		//@Value("${spring.datasource.url}")
-		private String url = "jdbc:mysql://127.0.0.1:3306/spring4_mybatis3?characterEncoding=UTF-8";
+		@Value("${spring.datasource.url}")
+		private String url;
 		/** * 数据库密码 */
-		//@Value("${spring.datasource.password}")
-		private String password = "Jj123456";
+		@Value("${spring.datasource.password}")
+		private String password;
 
 		public String getUserName() {
 			return userName;

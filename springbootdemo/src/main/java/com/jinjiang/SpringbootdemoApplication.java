@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class SpringbootdemoApplication {
 	public List<Employee> sayHello() {
 		return employeeMapper.findAll();
 	}
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootdemoApplication.class, args);
 	}
